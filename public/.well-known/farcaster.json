@@ -1,0 +1,30 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "version": "1",
+    "name": "Nexus Weaver",
+    "subtitle": "Built with Zara",
+    "description": "Nexus Weaver is a Base Mini App built with Zara.",
+    "iconUrl": "https://0co.to/images/zara-2.png",
+    "homeUrl": "https://6c64ca6b89794551becfd9f8f5f3bff3-pi4e.vercel.app",
+    "splashImageUrl": "https://6c64ca6b89794551becfd9f8f5f3bff3-pi4e.vercel.app/splash.png",
+    "splashBackgroundColor": "#000000",
+    "heroImageUrl": "https://6c64ca6b89794551becfd9f8f5f3bff3-pi4e.vercel.app/image.png",
+    "tagline": "Nexus Weaver",
+    "screenshotUrls": [
+      "https://6c64ca6b89794551becfd9f8f5f3bff3-pi4e.vercel.app/screenshot.png",
+      "https://6c64ca6b89794551becfd9f8f5f3bff3-pi4e.vercel.app/screenshot.png"
+    ],
+    "primaryCategory": "social",
+    "tags": [
+      "base",
+      "miniapp",
+      "onchainkit"
+    ],
+    "webhookUrl": "https://6c64ca6b89794551becfd9f8f5f3bff3-pi4e.vercel.app/api/webhook"
+  }
+}
