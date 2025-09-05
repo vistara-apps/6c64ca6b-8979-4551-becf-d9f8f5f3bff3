@@ -8,13 +8,14 @@ import { NetworkCard } from '@/components/NetworkCard';
 import { PinnedItem } from '@/components/PinnedItem';
 import { ChannelSelector } from '@/components/ChannelSelector';
 import { NetworkVisualization } from '@/components/NetworkVisualization';
+import { X402PaymentDemo } from '@/components/X402PaymentDemo';
 import { SUPPORTED_NETWORKS, MOCK_FARCASTER_CHANNELS, MOCK_CASTS } from '@/lib/constants';
 import { Network, NetworkConnection, PinnedItem as PinnedItemType, FarcasterChannel } from '@/lib/types';
-import { Search, Plus, Filter, Zap, Globe, MessageSquare, Pin, Settings2 } from 'lucide-react';
+import { Search, Plus, Filter, Zap, Globe, MessageSquare, Pin, Settings2, CreditCard } from 'lucide-react';
 
 export default function HomePage() {
   const { setFrameReady } = useMiniKit();
-  const [activeTab, setActiveTab] = useState<'networks' | 'pinned' | 'routing'>('networks');
+  const [activeTab, setActiveTab] = useState<'networks' | 'pinned' | 'routing' | 'payments'>('networks');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedChannels, setSelectedChannels] = useState<string[]>([]);
   const [connectedNetworks, setConnectedNetworks] = useState<NetworkConnection[]>([]);
@@ -199,7 +200,7 @@ export default function HomePage() {
               Network Map
             </h2>
             <NetworkVisualization
-              networks={SUPPORTED_NETWORKS}
+              networks={[...SUPPORTED_NETWORKS]}
               connections={connectedNetworks}
             />
           </div>
@@ -211,6 +212,7 @@ export default function HomePage() {
             { id: 'networks', label: 'Networks', icon: Globe },
             { id: 'pinned', label: 'Pinned', icon: Pin },
             { id: 'routing', label: 'Routing', icon: Zap },
+            { id: 'payments', label: 'Payments', icon: CreditCard },
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
@@ -406,6 +408,12 @@ export default function HomePage() {
                 Add New Rule
               </button>
             </div>
+          </div>
+        )}
+
+        {activeTab === 'payments' && (
+          <div className="space-y-6">
+            <X402PaymentDemo />
           </div>
         )}
       </main>
