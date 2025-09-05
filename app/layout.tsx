@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <div className="min-h-screen bg-gradient-to-br from-bg via-slate-900 to-bg">
+          <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
             {children}
           </div>
         </Providers>

@@ -66,8 +66,8 @@ export function NetworkCard({
             {network.icon}
           </div>
           <div>
-            <h3 className="font-semibold text-text-primary">{network.name}</h3>
-            <p className="text-sm text-text-secondary">{network.type}</p>
+            <h3 className="font-semibold text-gray-100">{network.name}</h3>
+            <p className="text-sm text-gray-400">{network.type}</p>
           </div>
         </div>
         
@@ -84,18 +84,18 @@ export function NetworkCard({
         <div className="grid grid-cols-2 gap-4 mb-4">
           {stats.channels && (
             <div className="text-center">
-              <div className="text-lg font-semibold text-text-primary">
+              <div className="text-lg font-semibold text-gray-100">
                 {formatNumber(stats.channels)}
               </div>
-              <div className="text-xs text-text-secondary">Channels</div>
+              <div className="text-xs text-gray-400">Channels</div>
             </div>
           )}
           {stats.messages && (
             <div className="text-center">
-              <div className="text-lg font-semibold text-text-primary">
+              <div className="text-lg font-semibold text-gray-100">
                 {formatNumber(stats.messages)}
               </div>
-              <div className="text-xs text-text-secondary">Messages</div>
+              <div className="text-xs text-gray-400">Messages</div>
             </div>
           )}
         </div>
@@ -131,10 +131,10 @@ export function NetworkCard({
 
         {isConnected && (
           <div className="flex items-center space-x-2">
-            <button className="p-2 text-text-secondary hover:text-text-primary transition-colors duration-200">
+            <button className="p-2 text-gray-400 hover:text-gray-100 transition-colors duration-200">
               <Settings2 className="w-4 h-4" />
             </button>
-            <button className="p-2 text-text-secondary hover:text-text-primary transition-colors duration-200">
+            <button className="p-2 text-gray-400 hover:text-gray-100 transition-colors duration-200">
               <ExternalLink className="w-4 h-4" />
             </button>
           </div>

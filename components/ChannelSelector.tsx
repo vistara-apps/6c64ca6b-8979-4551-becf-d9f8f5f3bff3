@@ -46,24 +46,24 @@ export function ChannelSelector({
     <div className="space-y-4">
       {/* Search */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-text-secondary" />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input
           type="text"
           placeholder="Search channels..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 bg-surface border border-gray-600 rounded-lg text-text-primary placeholder-text-secondary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors duration-200"
+          className="w-full pl-10 pr-4 py-3 bg-slate-800 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors duration-200"
         />
       </div>
 
       {/* Selection summary */}
       {selectedChannels.length > 0 && (
         <div className="flex items-center justify-between p-3 bg-accent/10 border border-accent/20 rounded-lg">
-          <span className="text-sm text-text-primary">
+          <span className="text-sm text-gray-100">
             {selectedChannels.length} channel{selectedChannels.length !== 1 ? 's' : ''} selected
           </span>
           {maxSelections && (
-            <span className="text-xs text-text-secondary">
+            <span className="text-xs text-gray-400">
               {selectedChannels.length}/{maxSelections}
             </span>
           )}
@@ -74,9 +74,9 @@ export function ChannelSelector({
       <div className="space-y-2 max-h-96 overflow-y-auto">
         {filteredChannels.map((channel) => {
           const isSelected = selectedChannels.includes(channel.id);
-          const isDisabled = maxSelections && 
+          const isDisabled = Boolean(maxSelections && 
             !isSelected && 
-            selectedChannels.length >= maxSelections;
+            selectedChannels.length >= maxSelections);
 
           return (
             <button
@@ -86,8 +86,8 @@ export function ChannelSelector({
               className={cn(
                 'w-full p-4 rounded-lg border transition-all duration-200 text-left',
                 isSelected
-                  ? 'bg-accent/20 border-accent text-text-primary'
-                  : 'bg-surface border-gray-600 hover:border-gray-500 text-text-primary',
+                  ? 'bg-accent/20 border-accent text-gray-100'
+                  : 'bg-slate-800 border-gray-600 hover:border-gray-500 text-gray-100',
                 isDisabled && 'opacity-50 cursor-not-allowed'
               )}
             >
@@ -103,12 +103,12 @@ export function ChannelSelector({
                   <div>
                     <h4 className="font-medium">{channel.name}</h4>
                     {channel.description && (
-                      <p className="text-sm text-text-secondary line-clamp-1">
+                      <p className="text-sm text-gray-400 line-clamp-1">
                         {channel.description}
                       </p>
                     )}
                     {channel.followerCount && (
-                      <p className="text-xs text-text-secondary mt-1">
+                      <p className="text-xs text-gray-400 mt-1">
                         {formatNumber(channel.followerCount)} followers
                       </p>
                     )}
@@ -127,7 +127,7 @@ export function ChannelSelector({
       </div>
 
       {filteredChannels.length === 0 && (
-        <div className="text-center py-8 text-text-secondary">
+        <div className="text-center py-8 text-gray-400">
           <p>No channels found matching "{searchQuery}"</p>
         </div>
       )}

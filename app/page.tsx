@@ -160,7 +160,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gradient">Nexus Weaver</h1>
-              <p className="text-sm text-text-secondary">Unify your communication</p>
+              <p className="text-sm text-gray-400">Unify your communication</p>
             </div>
             
             <Wallet>
@@ -179,34 +179,34 @@ export default function HomePage() {
         <div className="grid grid-cols-3 gap-4">
           <div className="metric-card text-center">
             <div className="text-2xl font-bold text-accent">{networkStats.connected}</div>
-            <div className="text-xs text-text-secondary">Connected</div>
+            <div className="text-xs text-gray-400">Connected</div>
           </div>
           <div className="metric-card text-center">
             <div className="text-2xl font-bold text-primary">{networkStats.active}</div>
-            <div className="text-xs text-text-secondary">Active</div>
+            <div className="text-xs text-gray-400">Active</div>
           </div>
           <div className="metric-card text-center">
-            <div className="text-2xl font-bold text-text-primary">{pinnedItems.length}</div>
-            <div className="text-xs text-text-secondary">Pinned</div>
+            <div className="text-2xl font-bold text-gray-100">{pinnedItems.length}</div>
+            <div className="text-xs text-gray-400">Pinned</div>
           </div>
         </div>
 
         {/* Network Visualization */}
         {connectedNetworks.length > 0 && (
           <div className="glass-card p-6">
-            <h2 className="text-lg font-semibold text-text-primary mb-4 flex items-center">
+            <h2 className="text-lg font-semibold text-gray-100 mb-4 flex items-center">
               <Globe className="w-5 h-5 mr-2 text-accent" />
               Network Map
             </h2>
             <NetworkVisualization
-              networks={SUPPORTED_NETWORKS}
+              networks={[...SUPPORTED_NETWORKS]}
               connections={connectedNetworks}
             />
           </div>
         )}
 
         {/* Tab Navigation */}
-        <div className="flex space-x-1 bg-surface rounded-lg p-1">
+        <div className="flex space-x-1 bg-slate-800 rounded-lg p-1">
           {[
             { id: 'networks', label: 'Networks', icon: Globe },
             { id: 'pinned', label: 'Pinned', icon: Pin },
@@ -218,7 +218,7 @@ export default function HomePage() {
               className={`flex-1 flex items-center justify-center space-x-2 py-3 px-4 rounded-md font-medium transition-all duration-200 ${
                 activeTab === id
                   ? 'bg-accent text-white shadow-lg'
-                  : 'text-text-secondary hover:text-text-primary hover:bg-surface/50'
+                  : 'text-gray-400 hover:text-gray-100 hover:bg-slate-800/50'
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -232,13 +232,13 @@ export default function HomePage() {
           <div className="space-y-6">
             {/* Search */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-text-secondary" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search networks..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-surface border border-gray-600 rounded-lg text-text-primary placeholder-text-secondary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors duration-200"
+                className="w-full pl-10 pr-4 py-3 bg-slate-800 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors duration-200"
               />
             </div>
 
@@ -275,13 +275,13 @@ export default function HomePage() {
             {/* Recent Casts (for pinning) */}
             {connectedNetworkIds.includes('farcaster') && (
               <div className="glass-card p-6">
-                <h3 className="text-lg font-semibold text-text-primary mb-4 flex items-center">
+                <h3 className="text-lg font-semibold text-gray-100 mb-4 flex items-center">
                   <MessageSquare className="w-5 h-5 mr-2 text-accent" />
                   Recent Casts
                 </h3>
                 <div className="space-y-4">
                   {MOCK_CASTS.map((cast) => (
-                    <div key={cast.hash} className="p-4 bg-surface/50 rounded-lg">
+                    <div key={cast.hash} className="p-4 bg-slate-800/50 rounded-lg">
                       <div className="flex items-start space-x-3">
                         <img
                           src={cast.author.pfpUrl}
@@ -290,18 +290,18 @@ export default function HomePage() {
                         />
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-2">
-                            <span className="font-medium text-text-primary">
+                            <span className="font-medium text-gray-100">
                               {cast.author.displayName}
                             </span>
-                            <span className="text-text-secondary text-sm">
+                            <span className="text-gray-400 text-sm">
                               @{cast.author.username}
                             </span>
                           </div>
-                          <p className="text-text-primary text-sm mb-3">
+                          <p className="text-gray-100 text-sm mb-3">
                             {cast.text}
                           </p>
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-4 text-text-secondary text-sm">
+                            <div className="flex items-center space-x-4 text-gray-400 text-sm">
                               <span>{cast.replies} replies</span>
                               <span>{cast.reactions} reactions</span>
                               <span>{cast.recasts} recasts</span>
@@ -324,7 +324,7 @@ export default function HomePage() {
 
             {/* Pinned Items */}
             <div>
-              <h3 className="text-lg font-semibold text-text-primary mb-4">
+              <h3 className="text-lg font-semibold text-gray-100 mb-4">
                 Your Pinned Items ({pinnedItems.length})
               </h3>
               {pinnedItems.length > 0 ? (
@@ -339,8 +339,8 @@ export default function HomePage() {
                 </div>
               ) : (
                 <div className="glass-card p-8 text-center">
-                  <Pin className="w-12 h-12 text-text-secondary mx-auto mb-4" />
-                  <p className="text-text-secondary">
+                  <Pin className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-400">
                     No pinned items yet. Pin important messages and links to access them here.
                   </p>
                 </div>
@@ -354,11 +354,11 @@ export default function HomePage() {
             {/* Channel Selection */}
             {connectedNetworkIds.includes('farcaster') && (
               <div className="glass-card p-6">
-                <h3 className="text-lg font-semibold text-text-primary mb-4 flex items-center">
+                <h3 className="text-lg font-semibold text-gray-100 mb-4 flex items-center">
                   <Settings2 className="w-5 h-5 mr-2 text-accent" />
                   Configure Routing
                 </h3>
-                <p className="text-text-secondary text-sm mb-6">
+                <p className="text-gray-400 text-sm mb-6">
                   Select channels to monitor for intelligent message routing.
                 </p>
                 <ChannelSelector
@@ -372,30 +372,30 @@ export default function HomePage() {
 
             {/* Routing Rules */}
             <div className="glass-card p-6">
-              <h3 className="text-lg font-semibold text-text-primary mb-4">
+              <h3 className="text-lg font-semibold text-gray-100 mb-4">
                 Routing Rules
               </h3>
               <div className="space-y-4">
-                <div className="p-4 bg-surface/50 rounded-lg border border-gray-600">
+                <div className="p-4 bg-slate-800/50 rounded-lg border border-gray-600">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-text-primary">
+                    <span className="font-medium text-gray-100">
                       High Priority Messages
                     </span>
                     <div className="connection-indicator online" />
                   </div>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-sm text-gray-400">
                     Route messages containing keywords: "urgent", "important", "@everyone"
                   </p>
                 </div>
                 
-                <div className="p-4 bg-surface/50 rounded-lg border border-gray-600">
+                <div className="p-4 bg-slate-800/50 rounded-lg border border-gray-600">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-text-primary">
+                    <span className="font-medium text-gray-100">
                       Mentions & DMs
                     </span>
                     <div className="connection-indicator online" />
                   </div>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-sm text-gray-400">
                     Route all direct mentions and private messages
                   </p>
                 </div>

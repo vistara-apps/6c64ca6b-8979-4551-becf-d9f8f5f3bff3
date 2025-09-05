@@ -15,10 +15,10 @@ export default function Error({
         </div>
         
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold text-text-primary">
+          <h2 className="text-2xl font-bold text-gray-100">
             Something went wrong!
           </h2>
-          <p className="text-text-secondary">
+          <p className="text-gray-400">
             We encountered an error while loading Nexus Weaver. Please try again.
           </p>
         </div>
@@ -41,10 +41,10 @@ export default function Error({
 
         {error.message && (
           <details className="text-left">
-            <summary className="text-sm text-text-secondary cursor-pointer hover:text-text-primary">
+            <summary className="text-sm text-gray-400 cursor-pointer hover:text-gray-100">
               Error Details
             </summary>
-            <pre className="mt-2 text-xs text-red-400 bg-surface/50 p-3 rounded-lg overflow-auto">
+            <pre className="mt-2 text-xs text-red-400 bg-slate-800/50 p-3 rounded-lg overflow-auto">
               {error.message}
             </pre>
           </details>

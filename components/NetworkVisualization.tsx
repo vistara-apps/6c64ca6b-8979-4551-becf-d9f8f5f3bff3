@@ -115,7 +115,7 @@ export function NetworkVisualization({
   }, [networks, connections, centerNode]);
 
   return (
-    <div className="relative w-full h-64 bg-surface/30 rounded-lg overflow-hidden">
+    <div className="relative w-full h-64 bg-slate-800/30 rounded-lg overflow-hidden">
       <canvas
         ref={canvasRef}
         className="w-full h-full"
@@ -139,7 +139,7 @@ export function NetworkVisualization({
               className="absolute transform -translate-x-1/2 -translate-y-1/2"
               style={{ left: `${x}%`, top: `${y}%` }}
             >
-              <div className="text-xs text-text-secondary text-center mt-8">
+              <div className="text-xs text-gray-400 text-center mt-8">
                 {network.name}
               </div>
             </div>
@@ -148,7 +148,7 @@ export function NetworkVisualization({
         
         {/* Center label */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <div className="text-xs text-text-secondary text-center mt-12">
+          <div className="text-xs text-gray-400 text-center mt-12">
             {centerNode.label}
           </div>
         </div>

@@ -6,10 +6,10 @@ export default function Loading() {
           <div className="w-full h-full border-4 border-accent border-t-transparent rounded-full animate-spin" />
         </div>
         <div className="space-y-2">
-          <h2 className="text-xl font-semibold text-text-primary">
+          <h2 className="text-xl font-semibold text-gray-100">
             Loading Nexus Weaver
           </h2>
-          <p className="text-text-secondary">
+          <p className="text-gray-400">
             Connecting to your networks...
           </p>
         </div>
