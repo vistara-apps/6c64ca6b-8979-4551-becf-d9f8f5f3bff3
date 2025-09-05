@@ -8,7 +8,9 @@
   }
   
   body {
-    @apply bg-bg text-text-primary;
+    @apply text-white;
+    background-color: hsl(230 20% 12%);
+    color: hsl(230 10% 95%);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
@@ -19,7 +21,8 @@
 
 @layer components {
   .glass-card {
-    @apply bg-surface bg-opacity-80 backdrop-blur-sm border border-gray-700 rounded-lg shadow-card;
+    @apply backdrop-blur-sm border border-gray-700 rounded-lg shadow-card;
+    background-color: hsla(230, 20%, 16%, 0.8);
   }
   
   .network-node {
@@ -38,7 +41,9 @@
   }
   
   .btn-secondary {
-    @apply bg-surface text-text-primary border border-gray-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-700 transition-all duration-200;
+    @apply border border-gray-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-700 transition-all duration-200;
+    background-color: hsl(230 20% 16%);
+    color: hsl(230 10% 95%);
   }
   
   .metric-card {

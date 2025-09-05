@@ -57,10 +57,10 @@ export function PinnedItem({
             )}
           </div>
           <div>
-            <div className="text-sm font-medium text-text-primary">
+            <div className="text-sm font-medium text-gray-100">
               {item.sourceNetwork}
             </div>
-            <div className="text-xs text-text-secondary">
+            <div className="text-xs text-gray-400">
               {formatTimestamp(item.timestamp)}
             </div>
           </div>
@@ -70,7 +70,7 @@ export function PinnedItem({
           <button
             onClick={handleUnpin}
             disabled={isUnpinning}
-            className="p-1.5 text-text-secondary hover:text-red-400 transition-colors duration-200"
+            className="p-1.5 text-gray-400 hover:text-red-400 transition-colors duration-200"
             title="Unpin item"
           >
             {isUnpinning ? (
@@ -85,11 +85,11 @@ export function PinnedItem({
       {/* Content */}
       <div className="mb-3">
         {item.title && (
-          <h4 className="font-medium text-text-primary mb-2 line-clamp-2">
+          <h4 className="font-medium text-gray-100 mb-2 line-clamp-2">
             {item.title}
           </h4>
         )}
-        <p className="text-text-secondary text-sm leading-relaxed">
+        <p className="text-gray-400 text-sm leading-relaxed">
           {truncateText(item.content, 200)}
         </p>
       </div>
@@ -101,16 +101,16 @@ export function PinnedItem({
             <button
               key={index}
               onClick={() => handleOpenUrl(url)}
-              className="flex items-center space-x-2 w-full p-2 bg-surface/50 rounded-lg hover:bg-surface transition-colors duration-200 text-left"
+              className="flex items-center space-x-2 w-full p-2 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors duration-200 text-left"
             >
               <ExternalLink className="w-4 h-4 text-accent flex-shrink-0" />
-              <span className="text-sm text-text-secondary truncate">
+              <span className="text-sm text-gray-400 truncate">
                 {url}
               </span>
             </button>
           ))}
           {urls.length > 2 && (
-            <div className="text-xs text-text-secondary text-center">
+            <div className="text-xs text-gray-400 text-center">
               +{urls.length - 2} more links
             </div>
           )}

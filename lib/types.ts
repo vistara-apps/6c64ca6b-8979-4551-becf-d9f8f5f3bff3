@@ -106,7 +106,7 @@ export interface PinnedItemProps {
 }
 
 export interface ConnectionStatusIndicatorProps {
-  status: 'online' | 'offline' | 'pending';
+  status: 'online' | 'offline' | 'pending' | 'error';
   size?: 'sm' | 'md' | 'lg';
 }
 
