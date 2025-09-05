@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 
 interface ConnectionStatusIndicatorProps {
-  status: 'online' | 'offline' | 'pending';
+  status: 'online' | 'offline' | 'pending' | 'error';
   size?: 'sm' | 'md' | 'lg';
   showLabel?: boolean;
 }
@@ -34,6 +34,11 @@ export function ConnectionStatusIndicator({
       className: 'connection-indicator pending',
       label: 'Connecting',
       color: 'bg-yellow-500',
+    },
+    error: {
+      className: 'connection-indicator error',
+      label: 'Error',
+      color: 'bg-red-500',
     },
   };
 

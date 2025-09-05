@@ -74,9 +74,9 @@ export function ChannelSelector({
       <div className="space-y-2 max-h-96 overflow-y-auto">
         {filteredChannels.map((channel) => {
           const isSelected = selectedChannels.includes(channel.id);
-          const isDisabled = maxSelections && 
+          const isDisabled = Boolean(maxSelections && 
             !isSelected && 
-            selectedChannels.length >= maxSelections;
+            selectedChannels.length >= maxSelections);
 
           return (
             <button
