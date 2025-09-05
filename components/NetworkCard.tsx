@@ -47,106 +47,168 @@ export function NetworkCard({
   };
 
   const isConnected = variant === 'connected' || connection?.active;
+  const statusText = connection?.status || 'disconnected';
+  const lastSyncText = connection?.lastSync 
+    ? `Last sync: ${connection.lastSync.toLocaleTimeString()}`
+    : null;
 
   return (
-    <div className={cn(
-      'network-node group relative overflow-hidden',
-      isConnected && 'border-accent border-opacity-50'
-    )}>
+    <article 
+      className={cn(
+        'network-node group relative overflow-hidden card-interactive',
+        isConnected && 'border-accent/30'
+      )}
+      role="article"
+      aria-labelledby={`network-${network.networkId}-title`}
+    >
       {/* Background gradient effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-accent/3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       
-      {/* Network icon and status */}
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center space-x-3">
+      {/* Network header with improved hierarchy */}
+      <header className="flex items-start justify-between mb-5">
+        <div className="flex items-center space-x-4 flex-1 min-w-0">
           <div 
-            className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl"
-            style={{ backgroundColor: `${network.color}20` }}
+            className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 shadow-inner"
+            style={{ backgroundColor: `${network.color}15`, color: network.color }}
+            aria-hidden="true"
           >
             {network.icon}
           </div>
-          <div>
-            <h3 className="font-semibold text-text-primary">{network.name}</h3>
-            <p className="text-sm text-text-secondary">{network.type}</p>
+          <div className="min-w-0 flex-1">
+            <h3 
+              id={`network-${network.networkId}-title`}
+              className="heading-4 truncate"
+            >
+              {network.name}
+            </h3>
+            <p className="body-small text-text-secondary capitalize">
+              {network.type}
+            </p>
+            {lastSyncText && isConnected && (
+              <p className="caption mt-1">
+                {lastSyncText}
+              </p>
+            )}
           </div>
         </div>
         
-        {connection && (
-          <ConnectionStatusIndicator 
-            status={connection.status} 
-            size="md"
-          />
-        )}
-      </div>
-
-      {/* Network stats */}
-      {stats && isConnected && (
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          {stats.channels && (
-            <div className="text-center">
-              <div className="text-lg font-semibold text-text-primary">
-                {formatNumber(stats.channels)}
-              </div>
-              <div className="text-xs text-text-secondary">Channels</div>
-            </div>
+        {/* Status indicator with better accessibility */}
+        <div className="flex items-center space-x-2 flex-shrink-0">
+          {connection && (
+            <>
+              <ConnectionStatusIndicator 
+                status={connection.status} 
+                size="md"
+              />
+              <span className="sr-only">
+                Connection status: {statusText}
+              </span>
+            </>
           )}
-          {stats.messages && (
-            <div className="text-center">
-              <div className="text-lg font-semibold text-text-primary">
-                {formatNumber(stats.messages)}
+          {isConnected && (
+            <div 
+              className="w-2 h-2 bg-success rounded-full animate-pulse"
+              aria-label="Active connection"
+              title="Active connection"
+            />
+          )}
+        </div>
+      </header>
+
+      {/* Enhanced network stats with better layout */}
+      {stats && isConnected && (
+        <div className="mb-5">
+          <div className="grid grid-cols-2 gap-4">
+            {stats.channels && (
+              <div className="text-center p-3 bg-surface/30 rounded-lg">
+                <div className="heading-3 text-accent">
+                  {formatNumber(stats.channels)}
+                </div>
+                <div className="caption">Channels</div>
               </div>
-              <div className="text-xs text-text-secondary">Messages</div>
+            )}
+            {stats.messages && (
+              <div className="text-center p-3 bg-surface/30 rounded-lg">
+                <div className="heading-3 text-primary">
+                  {formatNumber(stats.messages)}
+                </div>
+                <div className="caption">Messages</div>
+              </div>
+            )}
+          </div>
+          {stats.lastActivity && (
+            <div className="mt-3 text-center">
+              <p className="caption">
+                Last activity: {stats.lastActivity.toLocaleString()}
+              </p>
             </div>
           )}
         </div>
       )}
 
-      {/* Action buttons */}
-      <div className="flex items-center justify-between">
+      {/* Enhanced action buttons with better accessibility */}
+      <footer className="flex items-center justify-between gap-3">
         <button
           onClick={handleAction}
           disabled={isLoading}
           className={cn(
-            'flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-200',
+            'flex items-center space-x-2 px-5 py-3 rounded-lg font-medium transition-all duration-200 flex-1 justify-center touch-target',
             isConnected
-              ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
-              : 'bg-accent/20 text-accent hover:bg-accent/30',
+              ? 'bg-error/20 text-error hover:bg-error/30 focus:bg-error/30'
+              : 'bg-accent/20 text-accent hover:bg-accent/30 focus:bg-accent/30',
             isLoading && 'opacity-50 cursor-not-allowed'
           )}
+          aria-describedby={`network-${network.networkId}-status`}
         >
           {isLoading ? (
-            <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+            <>
+              <div className="loading-spinner" aria-hidden="true" />
+              <span>Processing...</span>
+              <span className="sr-only">
+                {isConnected ? 'Disconnecting from' : 'Connecting to'} {network.name}
+              </span>
+            </>
           ) : (
-            <Zap className="w-4 h-4" />
+            <>
+              <Zap className="w-4 h-4" aria-hidden="true" />
+              <span>
+                {isConnected ? 'Disconnect' : 'Connect'}
+              </span>
+            </>
           )}
-          <span>
-            {isLoading 
-              ? 'Processing...' 
-              : isConnected 
-                ? 'Disconnect' 
-                : 'Connect'
-            }
-          </span>
         </button>
 
+        {/* Secondary actions for connected networks */}
         {isConnected && (
-          <div className="flex items-center space-x-2">
-            <button className="p-2 text-text-secondary hover:text-text-primary transition-colors duration-200">
+          <div className="flex items-center space-x-1">
+            <button 
+              className="btn-icon"
+              aria-label={`Configure ${network.name} settings`}
+              title={`Configure ${network.name} settings`}
+            >
               <Settings2 className="w-4 h-4" />
             </button>
-            <button className="p-2 text-text-secondary hover:text-text-primary transition-colors duration-200">
+            <button 
+              className="btn-icon"
+              aria-label={`Open ${network.name} in new tab`}
+              title={`Open ${network.name} in new tab`}
+            >
               <ExternalLink className="w-4 h-4" />
             </button>
           </div>
         )}
-      </div>
+      </footer>
 
-      {/* Connection pulse effect */}
-      {isConnected && (
-        <div className="absolute top-2 right-2">
-          <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-        </div>
-      )}
-    </div>
+      {/* Hidden status description for screen readers */}
+      <div 
+        id={`network-${network.networkId}-status`}
+        className="sr-only"
+      >
+        {network.name} is currently {isConnected ? 'connected' : 'disconnected'}.
+        {connection?.status && ` Status: ${connection.status}.`}
+        {stats?.channels && ` ${stats.channels} channels available.`}
+        {stats?.messages && ` ${stats.messages} messages synced.`}
+      </div>
+    </article>
   );
 }
